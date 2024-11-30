@@ -15,3 +15,15 @@ def pregunta_02():
     [('A', 8), ('B', 7), ('C', 5), ('D', 6), ('E', 14)]
 
     """
+
+    registros = {}
+    with open('files/input/data.csv', mode='r', encoding='utf-8') as archivo:
+
+        for fila in archivo:  # Itera sobre las filas
+            letra = fila[0].replace('\t', '')[0]
+            if letra in registros:
+                registros[letra] += 1
+            else:
+                registros[letra] = 1
+    resultado = sorted(registros.items())
+    return resultado

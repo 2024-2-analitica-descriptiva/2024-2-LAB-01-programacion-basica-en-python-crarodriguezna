@@ -15,3 +15,17 @@ def pregunta_03():
     [('A', 53), ('B', 36), ('C', 27), ('D', 31), ('E', 67)]
 
     """
+
+    registros = {}
+    with open('files/input/data.csv', mode='r', encoding='utf-8') as archivo:
+
+        for fila in archivo:  # Itera sobre las filas
+            letra = fila[0].replace('\t', '')[0]
+            valor = int(fila.split('\t')[1].replace('\n', ''))
+            if letra in registros:
+                registros[letra] += valor
+            else:
+                registros[letra] = valor
+    resultado = sorted(registros.items())
+    return resultado
+print(pregunta_03())

@@ -20,3 +20,13 @@ def pregunta_10():
 
 
     """
+    registros = []
+    with open('files/input/data.csv', mode='r', encoding='utf-8') as archivo:
+
+        for fila in archivo:  # Itera sobre las filas
+            letra = fila[0].replace('\t', '')[0]
+            col4 = len(fila.split('\t')[3].split(','))
+            col5 = len(fila.split('\t')[4].split(','))
+            registros.append((letra, col4, col5))
+    return registros
+print(pregunta_10())

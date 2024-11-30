@@ -9,8 +9,8 @@ utilizar pandas, numpy o scipy.
 def pregunta_07():
     """
     Retorne una lista de tuplas que asocien las columnas 0 y 1. Cada tupla
-    contiene un valor posible de la columna 2 y una lista con todas las letras
-    asociadas (columna 1) a dicho valor de la columna 2.
+    contiene un valor posible de la columna 1 y una lista con todas las letras
+    asociadas (columna 1) a dicho valor de la columna 1.
 
     Rta/
     [(0, ['C']),
@@ -25,3 +25,16 @@ def pregunta_07():
      (9, ['A', 'B', 'E', 'A', 'A', 'C'])]
 
     """
+    registros = {}
+    with open('files/input/data.csv', mode='r', encoding='utf-8') as archivo:
+
+        for fila in archivo:  # Itera sobre las filas
+            valor = int(fila.split('\t')[1])
+            letra = fila[0].replace('\t', '')[0]
+            if valor in registros:
+                registros[valor].append(letra)
+            else:
+                registros[valor] = [letra]
+    resultado = sorted([(k, v) for k, v in registros.items()])
+    return resultado
+print(pregunta_07())

@@ -16,3 +16,20 @@ def pregunta_11():
 
 
     """
+    conteo_letras = {}
+    with open("files/input/data.csv", "r", encoding="utf-8") as file:
+        for line in file:
+            # Obtenemos el valor de la columna 2
+            valor_col_2 = int(line.strip().split("\t")[1])
+            # Obtenemos las letras de la columna 4
+            letras_col_4 = line.strip().split("\t")[3].split(",")
+            # Sumamos el valor de la columna 2 a cada letra de la columna 4
+            for letra in letras_col_4:
+                if letra in conteo_letras:
+                    conteo_letras[letra] += valor_col_2
+                else:
+                    conteo_letras[letra] = valor_col_2
+    # Ordenamos el diccionario alfabéticamente por las claves
+    conteo_letras_ordenado = dict(sorted(conteo_letras.items()))
+    return conteo_letras_ordenado
+print(pregunta_11())

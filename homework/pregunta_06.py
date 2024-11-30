@@ -26,3 +26,22 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+    registros = {}
+    with open('files/input/data.csv', mode='r', encoding='utf-8') as archivo:
+
+        for fila in archivo:  # Itera sobre las filas
+            diccionario = fila.split('\t')[4].replace('\n', '')
+            diccionario = diccionario.split(',')
+            for item in diccionario:
+                clave, valor = item.split(':')
+                valor = int(valor)
+                if clave in registros:
+                    if valor > registros[clave][0]:
+                        registros[clave] = (valor, registros[clave][1])
+                    if valor < registros[clave][1]:
+                        registros[clave] = (registros[clave][0], valor)
+                else:
+                    registros[clave] = (valor, valor)
+    resultado = sorted([(k, v[1], v[0]) for k, v in registros.items()])
+    return resultado
+print(pregunta_06())
